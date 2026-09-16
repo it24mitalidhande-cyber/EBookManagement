@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Book Management System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .books {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .book {
+            background: white;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 2px 5px #aaa;
+        }
+
+        button {
+            background: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>E-Book Management System</h1>
+    <p>Manage and explore your favourite books</p>
+</header>
+
+<div class="container">
+
+    <h2>Search Books</h2>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search for a book..."
+        onkeyup="searchBooks()"
+    >
+
+    <div class="books">
+
+        <div class="book">
+            <h3>Java Programming</h3>
+            <p>Author: James Gosling</p>
+            <p>Category: Programming</p>
+            <button onclick="viewBook('Java Programming')">
+                View Book
+            </button>
+        </div>
+
+        <div class="book">
+            <h3>Python Basics</h3>
+            <p>Author: Guido van Rossum</p>
+            <p>Category: Programming</p>
+            <button onclick="viewBook('Python Basics')">
+                View Book
+            </button>
+        </div>
+
+        <div class="book">
+            <h3>Web Development</h3>
+            <p>Author: Tim Berners-Lee</p>
+            <p>Category: Web</p>
+            <button onclick="viewBook('Web Development')">
+                View Book
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+function searchBooks() {
+
+    let searchText =
+        document.getElementById("search").value.toLowerCase();
+
+    let books =
+        document.getElementsByClassName("book");
+
+    for (let i = 0; i < books.length; i++) {
+
+        let title =
+            books[i].getElementsByTagName("h3")[0]
+            .innerText.toLowerCase();
+
+        if (title.includes(searchText)) {
+            books[i].style.display = "block";
+        } else {
+            books[i].style.display = "none";
+        }
+    }
+}
+
+function viewBook(bookName) {
+    alert("You selected: " + bookName);
+}
+
+</script>
+
+</body>
+</html>
