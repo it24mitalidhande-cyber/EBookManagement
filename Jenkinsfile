@@ -1,17 +1,22 @@
-
 pipeline {
     agent any
 
+    environment {
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-25.0.3'
+        PATH = "C:\\Program Files\\Java\\jdk-25.0.3\\bin;C:\\apache-maven-3.9.16\\bin;${env.PATH}"
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Check Tools') {
             steps {
-                checkout scm
+                bat 'java -version'
+                bat 'mvn -version'
             }
         }
 
         stage('Build and Test') {
             steps {
-                bat 'gradlew.bat clean build'
+                bat 'mvn clean test package'
             }
         }
     }
@@ -21,7 +26,7 @@ pipeline {
             echo 'Build and tests completed successfully!'
         }
         failure {
-            echo 'Build failed. Check the console output.'
+            echo 'Build failed. Check the Console Output.'
         }
     }
 }
